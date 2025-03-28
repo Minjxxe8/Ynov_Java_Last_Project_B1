@@ -1,16 +1,46 @@
 package fr.ynov.expenses_Gestionnary.domain;
 
-public class Transaction {
+import java.util.List;
+
+public abstract class Transaction {
     public double amount;
     public String description;
     public String date;
-    public String category;
+    public Category category;
+    public List<Expenses> expenses;
+    public List<Revenue> revenues;
 
-    public Transaction(double amount, String description, String date, String category) {
-        this.amount = 0.0;
+    public Transaction(double amount, String description) {
+        this.amount = amount;
         this.description = "";
         this.date = "";
-        this.category = "";
     }
+
+    enum Category {
+        ALIMENTATION,
+        TRANSPORT,
+        LOGEMENT,
+        LOISIRS,
+        SANTÉ,
+        AUTRE
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getCategory() {
+        return category.name();
+    }
+
+    public abstract double getChange();
 
 }

@@ -2,11 +2,13 @@ package fr.ynov.expenses_Gestionnary.domain;
 
 public class Expenses extends Transaction{
 
-    public Expenses(double amount, String description, String date, String category) {
-        super(amount, description, date, category);
+    public Expenses(double amount, String description) {
+        super(amount, description);
     }
 
-    public double getAmount() {
+
+    @Override
+    public double getChange() {
         return amount;
     }
 }

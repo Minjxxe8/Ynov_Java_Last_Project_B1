@@ -1,11 +1,12 @@
 package fr.ynov.expenses_Gestionnary.domain;
 
 public class Revenue extends Transaction {
-    public Revenue(double amount, String description, String date, String category) {
-        super(amount, description, date, category);
+    public Revenue(double amount, String description) {
+        super(amount, description);
     }
 
-    public double getRevenue() {
-        return amount;
+    @Override
+    public double getChange() {
+        return -amount;
     }
 }

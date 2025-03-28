@@ -5,35 +5,46 @@ import java.util.List;
 public class Budget {
     public double currentSpending;
     public double totalBudget;
-    public List <Expenses> expenses;
-    public List <Revenue> revenues;
+    public List <Transaction> transactions;
 
     public Budget(double totalBudget) {
-        this.currentSpending = currentSpending;
+        this.currentSpending = 0.0;
         this.totalBudget = totalBudget;
-        this.expenses = new ArrayList<>();
+        this.transactions = new ArrayList<>();
     }
 
-    public Boolean addExpenses(Expenses expense) {
-        if (expense.getAmount() + currentSpending >= totalBudget) {
-            System.out.println("You cannot add this expenses, its more than you're budget");
-            return false;
+    public void addTransaction(Transaction transaction) {
+        double newTransaction = transaction.getAmount();
+
+        if (transaction instanceof Expenses) {
+            Debts debts = new Debts();
+            if (debts.getDebtsSize() > 0) {
+                if (transaction.getAmount() > 10) {
+                    transactions.add(transaction);
+                    currentSpending += transaction.getAmount();
+                    System.out.println("You have added a new expense :" + newTransaction);
+                } else {
+                    System.out.println("You can't add expenses, you have debts to paid before");
+                }
+            }
+            if (newTransaction + currentSpending > totalBudget) {
+                System.out.println("You can't add this transaction, with it, its more than your budget...");
+            } else {
+                transactions.add(transaction);
+                currentSpending += transaction.getAmount();
+                System.out.println("You have added a new expense :" + newTransaction);
+            }
         }
-        expenses.add(expense);
-        totalBudget -= expense.getAmount();
-        System.out.println("You have budgeted " + expense.getAmount());
-        return true;
     }
 
-    public Boolean addRevenue(Revenue revenue) {
-        if (currentSpending - revenue.getRevenue() < 0.0) {
-            totalBudget = totalBudget;
-            System.out.println("Your budget is now to : " + revenue.getRevenue());
-            return false;
+    public void getCurrentSpending() {
+        System.out.println("Current Spending : " + currentSpending);
+    }
+
+    public void displayTransactions() {
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
         }
-        revenues.add(revenue);
-        currentSpending -= revenue.getRevenue();;
-        return true;
     }
 
 }
