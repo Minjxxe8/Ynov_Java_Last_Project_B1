@@ -2,8 +2,8 @@ package fr.ynov.expenses_Gestionnary.domain;
 
 public class Expenses extends Transaction{
 
-    public Expenses(double amount, String description) {
-        super(amount, description);
+    public Expenses(double amount, String description, Category category) {
+        super(amount, description, Category.AUTRE);
     }
 
 

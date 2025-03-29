@@ -6,26 +6,22 @@ public class Budget {
     public double currentSpending;
     public double totalBudget;
     public List <Transaction> transactions;
+    public DebtsManager debtsManager;
 
     public Budget(double totalBudget) {
         this.currentSpending = 0.0;
         this.totalBudget = totalBudget;
         this.transactions = new ArrayList<>();
+        this.debtsManager = new DebtsManager();
     }
 
     public void addTransaction(Transaction transaction) {
         double newTransaction = transaction.getAmount();
 
         if (transaction instanceof Expenses) {
-            Debts debts = new Debts();
-            if (debts.getDebtsSize() > 0) {
-                if (transaction.getAmount() > 10) {
-                    transactions.add(transaction);
-                    currentSpending += transaction.getAmount();
-                    System.out.println("You have added a new expense :" + newTransaction);
-                } else {
-                    System.out.println("You can't add expenses, you have debts to paid before");
-                }
+            if (!debtsManager.debts.isEmpty()) {
+                System.out.println("You can't add expenses, you have debts to paid before");
+                return;
             }
             if (newTransaction + currentSpending > totalBudget) {
                 System.out.println("You can't add this transaction, with it, its more than your budget...");

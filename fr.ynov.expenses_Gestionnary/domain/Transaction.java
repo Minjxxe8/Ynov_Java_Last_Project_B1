@@ -10,13 +10,14 @@ public abstract class Transaction {
     public List<Expenses> expenses;
     public List<Revenue> revenues;
 
-    public Transaction(double amount, String description) {
+    public Transaction(double amount, String description, Category category) {
         this.amount = amount;
         this.description = "";
         this.date = "";
+        this.category = category;
     }
 
-    enum Category {
+    public enum Category {
         ALIMENTATION,
         TRANSPORT,
         LOGEMENT,
