@@ -27,10 +27,12 @@ public class Budget {
             }
             if (newTransaction + currentSpending > totalBudget) {
                 System.out.println("You can't add this transaction, with it, its more than your budget...");
+                return;
             } else {
                 transactions.add(transaction);
-                currentSpending += transaction.getAmount();
-                profile.balance -= transaction.getAmount();
+                currentSpending += newTransaction;
+                profile.balance -= newTransaction;
+                totalBudget -= newTransaction;
                 System.out.println("You have added a new expense :" + newTransaction);
             }
         }

@@ -38,4 +38,8 @@ public class Profile {
         System.out.println("Balance : " + balance);
     }
 
+    public void getName() {
+        System.out.println("Name : " + name);
+    }
+
 }
