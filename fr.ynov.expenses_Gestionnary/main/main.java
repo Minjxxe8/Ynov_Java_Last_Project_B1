@@ -11,7 +11,7 @@ public class main {
 
         Profile profile = new Profile("Léna", "Ricard", 600);
         profile.displayBalance();
-        Budget budget = new Budget(300);
+        Budget budget = new Budget(profile,300);
         Expenses pizza = new Expenses(20, "pizzaaaa", Transaction.Category.ALIMENTATION);
         Revenue salaire = new Revenue(400, "salaire", Transaction.Category.AUTRE);
         budget.addTransaction(pizza);

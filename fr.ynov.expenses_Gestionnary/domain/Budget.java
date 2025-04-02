@@ -7,12 +7,14 @@ public class Budget {
     public double totalBudget;
     public List <Transaction> transactions;
     public DebtsManager debtsManager;
+    public Profile profile;
 
-    public Budget(double totalBudget) {
+    public Budget(Profile profile, double totalBudget) {
         this.currentSpending = 0.0;
         this.totalBudget = totalBudget;
         this.transactions = new ArrayList<>();
         this.debtsManager = new DebtsManager();
+        this.profile = profile;
     }
 
     public void addTransaction(Transaction transaction) {
@@ -28,6 +30,7 @@ public class Budget {
             } else {
                 transactions.add(transaction);
                 currentSpending += transaction.getAmount();
+                profile.balance -= transaction.getAmount();
                 System.out.println("You have added a new expense :" + newTransaction);
             }
         }
